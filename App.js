@@ -8,6 +8,7 @@ import * as Location from 'expo-location';
 
 export default function App() {
   const [errorMessage, setErrorMessage] = useState(null)
+  const [currentWeather, setCurrentWeather] = useState(null)
   useEffect(() => {
     load()
   }, [])
@@ -21,20 +22,46 @@ export default function App() {
         return
       }
       const location = await Location.getCurrentPositionAsync()
+      const { latitude, longtitude } = location.coords
 
       const weatherUrl = `${BASE_WEATHER_URL}lat=${latitude}&lon=${longtitude}&appid=${WEATHER_API_KEY}`
 
+      const response = await fetch(weatherUrl)
 
-      const { latitude, longtitude } = location.coords
+      const result = await response.json()
+
+      if(response.ok) {
+        setCurrentWeather(result)
+      }else {
+        setErrorMessage(result.message)
+      }
+
+ 
+      alert(`Latitude : ${latitude}, Longtitude: ${longtitude}`)
       
-    }  catch (error) {}
+    }  catch (error) {
+      setErrorMessage(error.message)
+    }
   }
-  return (
-    <View style={styles.container}>
-      <Text>Lance's Weather App</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  if(currentWeather) {
+    const { 
+      main : {temp},
+     } = currentWeather
+    return (
+      <View style={styles.container}>
+        <Text>Lance's Weather App</Text>
+        <StatusBar style="auto" />
+      </View>
+    )
+  } else {
+      return (
+        <View style={styles.container}>
+        <Text>{errorMessage}</Text>
+        <StatusBar style="auto" />
+      </View>
+      )
+ 
+  }
 }
 
 const styles = StyleSheet.create({
