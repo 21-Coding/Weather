@@ -22,9 +22,9 @@ export default function App() {
         return
       }
       const location = await Location.getCurrentPositionAsync()
-      const { latitude, longtitude } = location.coords
+      const { latitude, longitude } = location.coords
 
-      const weatherUrl = `${BASE_WEATHER_URL}lat=${latitude}&lon=${longtitude}&appid=${WEATHER_API_KEY}`
+      const weatherUrl = `${BASE_WEATHER_URL}lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`
 
       const response = await fetch(weatherUrl)
 
@@ -37,7 +37,7 @@ export default function App() {
       }
 
  
-      alert(`Latitude : ${latitude}, Longtitude: ${longtitude}`)
+      alert(`Latitude : ${latitude}, Longtitude: ${longitude}`)
       
     }  catch (error) {
       setErrorMessage(error.message)
