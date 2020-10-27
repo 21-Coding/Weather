@@ -9,6 +9,7 @@ import * as Location from 'expo-location';
 export default function App() {
   const [errorMessage, setErrorMessage] = useState(null)
   const [currentWeather, setCurrentWeather] = useState(null)
+  const [unitsSystem, setUnitsSystem] = useState('metric')
   useEffect(() => {
     load()
   }, [])
@@ -24,7 +25,7 @@ export default function App() {
       const location = await Location.getCurrentPositionAsync()
       const { latitude, longitude } = location.coords
 
-      const weatherUrl = `${BASE_WEATHER_URL}lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`
+      const weatherUrl = `${BASE_WEATHER_URL}lat=${latitude}&lon=${longitude}&units=${unitsSystem}&appid=${WEATHER_API_KEY}`
 
       const response = await fetch(weatherUrl)
 
@@ -45,11 +46,11 @@ export default function App() {
   }
   if(currentWeather) {
     const { 
-      main : {temp},
+      main : { temp },
      } = currentWeather
     return (
       <View style={styles.container}>
-        <Text>Lance's Weather App</Text>
+        <Text>{temp}</Text>
         <StatusBar style="auto" />
       </View>
     )
