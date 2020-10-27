@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
  const WEATHER_API_KEY = '4f23ed6755890fb8386c128be29a9e48'
- const BASE_WEATHER_URL = 'api.openweathermap.org/data/2.5/weather?'
+ const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?'
 
 
 export default function App() {
