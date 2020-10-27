@@ -15,7 +15,7 @@ export default function App() {
 
   async function load() {
     try {
-      let { status } = await Location.requestPermissionAsync()
+      let { status } = await Location.requestPermissionsAsync()
 
       if(status != 'granted'){
         setErrorMessage('Access to location is needed to run the app')
