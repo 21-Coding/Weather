@@ -12,7 +12,7 @@ export default function WeatherInfo({ currentWeather }) {
 
     return (
         <View style={styles.weatherInfo}>
-            <Image source={{uri: iconUrl}}/>
+            <Image style={styles.weatherIcon} source={{ uri: iconUrl }} />
             <Text>{temp}</Text>
         </View>
     )
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
     weatherIcon: {
         width: 100,
         height: 100,
+
     },
 })
