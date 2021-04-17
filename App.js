@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
 import WeatherInfo from './components/WeatherInfo'
+import UnitsPicker from './components/UnitsPicker'
 
  const WEATHER_API_KEY = '4f23ed6755890fb8386c128be29a9e48'
  const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?'
@@ -14,9 +15,10 @@ export default function App() {
   const [unitsSystem, setUnitsSystem] = useState('metric')
   useEffect(() => {
     load()
-  }, [])
+  }, [unitsSystem])
 
   async function load() {
+    setCurrentWeather(null)
     try {
       let { status } = await Location.requestPermissionsAsync()
 
@@ -40,20 +42,19 @@ export default function App() {
       }
 
  
-      alert(`Welcome To Kids iOS Weather`)
+     
       
     }  catch (error) {
       setErrorMessage(error.message)
     }
   }
   if(currentWeather) {
-    const { 
-      main : { temp },
-     } = currentWeather
+   
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.main}>
+          <UnitsPicker unitsSystem={unitsSystem} setUnitsSystem={setUnitsSystem} />
           <WeatherInfo currentWeather={currentWeather} />    
        
         </View>
