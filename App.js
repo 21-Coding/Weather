@@ -40,7 +40,7 @@ export default function App() {
       }
 
  
-      alert(`Latitude : ${latitude}, Longtitude: ${longitude}`)
+      alert(`Welcome To Kids iOS Weather`)
       
     }  catch (error) {
       setErrorMessage(error.message)
